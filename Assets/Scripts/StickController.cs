@@ -11,13 +11,13 @@ public class StickController : MonoBehaviour
     [SerializeField] private TextMeshPro scoreText;
     private void Start()
     {
-        score=GameManager.StickScore;
-        scoreText.text=score.ToString();
+        score = GameManager.StickScore;
+        scoreText.text = score.ToString();
     }
     private void StickMove()
     {
-          if(!isHit)
-            transform.Translate(Vector2.up*moveSpeed*Time.deltaTime);
+        if (!isHit)
+            transform.Translate(Vector2.up * moveSpeed * Time.deltaTime);
     }
     private void Update()
     {
@@ -26,12 +26,12 @@ public class StickController : MonoBehaviour
     //Triggers
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       if(collision.gameObject.tag=="Circle")
-       {
-          isHit=true;
-          transform.SetParent(collision.transform);
-       }
-        if(collision.gameObject.tag=="Stick")
+        if (collision.gameObject.tag == "Circle")
+        {
+            isHit = true;
+            transform.SetParent(collision.transform);
+        }
+        if (collision.gameObject.tag == "Stick")
         {
             Debug.LogWarning("Game Over");
         }
