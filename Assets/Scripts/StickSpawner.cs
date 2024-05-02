@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class StickSpawner : MonoBehaviour
 {
-   [SerializeField]private GameObject stick;
+    [SerializeField] private GameObject stick;
 
-   private void OnEnable()
-   {
-       GameManager.OnClick+=Spawn;
-   }
-   private void Spawn()
-   {
-       Instantiate(stick,transform.position,Quaternion.identity);
-   }
+    private void OnEnable()
+    {
+        GameManager.OnClick += Spawn;
+    }
+    private void OnDisable()
+    {
+        GameManager.OnClick -= Spawn;
+    }
+    private void Spawn()
+    {
+        Instantiate(stick, transform.position, Quaternion.identity);
+    }
 }

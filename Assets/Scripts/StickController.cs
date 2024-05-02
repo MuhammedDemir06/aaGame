@@ -33,7 +33,7 @@ public class StickController : MonoBehaviour
         }
         if (collision.gameObject.tag == "Stick")
         {
-            Debug.LogWarning("Game Over");
+            GameManager.IsGameOver = true;
         }
     }
 }
