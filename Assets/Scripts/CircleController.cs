@@ -10,6 +10,11 @@ public class CircleController : MonoBehaviour
         GameManager.DestroyStick += DeleteGameObjectChilds;
         GameManager.IncreaseCircleSpeed += TurnSpeedControl;
     }
+    private void OnDisable()
+    {
+        GameManager.DestroyStick -= DeleteGameObjectChilds;
+        GameManager.IncreaseCircleSpeed -= TurnSpeedControl;
+    }
     private void DeleteGameObjectChilds()
     {
         GameObject[] children = new GameObject[transform.childCount];

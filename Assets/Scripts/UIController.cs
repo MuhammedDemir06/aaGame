@@ -9,6 +9,14 @@ public class UIController : MonoBehaviour
     [Header("UI GameObjects")]
     [SerializeField] private GameObject gameOverScreen;
     private string nextSceneName;
+    [Header("Animatons")]
+    [SerializeField] private Animator menuButtonPressAnim;
+    [Header("Sounds")]
+    [SerializeField] private AudioSource buttonSound;
+    private void Start()
+    {
+        buttonSound.Pause();
+    }
     private void GameOverController()
     {
         if(GameManager.IsGameOver)
@@ -21,6 +29,7 @@ public class UIController : MonoBehaviour
         sceneTransition.gameObject.SetActive(true);
         sceneTransition.NextScene();
         yield return new WaitForSeconds(2f);
+        GameManager.IsGameOver = false;
         SceneManager.LoadScene(nextSceneName);
     }
     private void Update()
@@ -32,11 +41,25 @@ public class UIController : MonoBehaviour
     {
         GameManager.IsGameOver = false;
         nextSceneName = "Game";
+        buttonSound.Play();
         StartCoroutine(SceneTransition());
     }
-    public void MenuButton()
+    public void MenuButton(int menuButtonIndex)
     {
-        nextSceneName = "Menu";
-        StartCoroutine(SceneTransition());
+       
+        switch(menuButtonIndex)
+        {
+            case 0:// Game Over Screen
+                nextSceneName = "Menu";
+                buttonSound.Play();
+                StartCoroutine(SceneTransition());              
+                break;
+            case 1: //Game Screen
+                nextSceneName = "Menu";
+                menuButtonPressAnim.SetTrigger("Press");
+                buttonSound.Play();
+                StartCoroutine(SceneTransition());
+                break;
+        }
     }
 }
